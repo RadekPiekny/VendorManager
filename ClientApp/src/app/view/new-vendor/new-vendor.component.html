@@ -1,0 +1,4 @@
+<form [formGroup]="vendorForm">
+    <input-text label="street" formControlName="street"></input-text>
+</form>
+{{vendorForm.value | json}}
