@@ -1,16 +1,352 @@
-/* You can add global styles to this file, and also import other style files */
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+html, body {
+    margin: 0;
 }
-
-code {
-  color: #e01a76;
+html {
+    box-sizing: border-box;
 }
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+:root {
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    --app-color-main-0: rgba(0,0,255,1);
+
+    --app-color-grey-0: rgba(0,0,0,1);
+    --app-color-grey-1: rgba(15,15,15,1);
+    --app-color-grey-2: rgba(31,31,31,1);
+    --app-color-grey-3: rgba(47,47,47,1);
+    --app-color-grey-4: rgba(63,63,63,1);
+    --app-color-grey-5: rgba(79,79,79,1);
+    --app-color-grey-6: rgba(95,95,95,1);
+    --app-color-grey-7: rgba(111,111,111,1);
+    --app-color-grey-8: rgba(127,127,127,1);
+    --app-color-grey-9: rgba(143,143,143,1);
+    --app-color-grey-10: rgba(159,159,159,1);
+    --app-color-grey-11: rgba(175,175,175,1);
+    --app-color-grey-12: rgba(191,191,191,1);
+    --app-color-grey-13: rgba(207,207,207,1);
+    --app-color-grey-14: rgba(223,223,223,1);
+    --app-color-grey-15: rgba(239,239,239,1);
+    --app-color-grey-16: rgba(255,255,255,1);
+      /* status */
+    --app-colors-status-good: rgb(78,181,35);
+    --app-colors-status-warn: rgb(225,182,0);
+    --app-colors-status-bad: rgb(224,48,30);
+
+    --dark-modal-bg: var(--app-color-grey-12);
+    --light-modal-bg: var(--app-color-grey-1);
+
+    --dark-main-bg-color: var(--app-color-grey-4);
+    --dark-nav-bg-color: var(--app-color-grey-3);
+    --dark-font-color: var(--app-color-grey-13);
+    --dark-font-color-Hover: var(--app-color-grey-11);
+    --dark-font-disabled-color: var(--app-color-grey-7);
+    --dark-elements-shadow-color-r: 0;
+    --dark-elements-shadow-color-g: 0;
+    --dark-elements-shadow-color-b: 0;
+    --dark-elements-shadow-opacity-1: 0.8;
+    --dark-elements-shadow-opacity-2: 0.74;
+    --dark-elements-shadow-opacity-3: 0.9;
+    --dark-button-fixed-bg: var(--app-color-Mono-4);
+    --dark-button-fixed-bg-Hover: var(--app-color-Mono-5);
+    --dark-button-fixed-color: var(--dark-main-bg-color);
+    --dark-button-small-bg: var(--app-color-grey-4);
+    --dark-button-small-bg-Hover: var(--app-color-grey-5);
+    --dark-button-small-color: var(--dark-font-color);
+    --dark-button-normal-bg: var(--PWC-colors-orange);
+    --dark-button-normal-bg-Hover: var(--PWC-colors-orange-light);
+    --dark-button-normal-color: var(--PWC-colors-grayscale-darker);
+    --dark-button-normal-disabled-bg: var(--app-color-grey-9);
+    --dark-button-normal-disabled-bg-Hover: initial;
+    --dark-button-normal-disabled-color: var(--app-color-grey-6);
+
+    --dark-button-icon-bg: transparent;
+    --dark-button-icon-color: var(--dark-font-color);
+    --dark-button-icon-color-Hover: var(--dark-font-color-Hover);
+
+    --dark-card-bg: var(--dark-nav-bg-color);
+    --dark-card-bg-Cell: var(--dark-main-bg-color);
+
+    --dark-item-Selection-bg: rgba(0,137,235,0.4);
+    --dark-item-Selection-border-color: var(--PWC-colors-orange);
+
+    --dark-barChart-bar-bg: var(--app-color-Mono-4);
+    --dark-input-bg: var(--app-color-grey-4);
+    --dark-input-bg-Cell: var(--app-color-grey-5);
+
+    --light-main-bg-color: var(--app-color-grey-14);
+    --light-nav-bg-color: var(--app-color-grey-15);
+    --light-font-color: var(--app-color-grey-2);
+    --light-font-color-Hover: var(--app-color-grey-3);
+    --light-font-disabled-color: var(--app-color-grey-12);
+    --light-icon-heart-stroke-inactive: var(--app-color-grey-2);
+    --light-icon-heart-stroke-active: var(--app-color-Mono-7);
+    --light-icon-heart-fill-inactive: rgba(255, 136, 136,0);
+    --light-icon-heart-fill-active: var(--app-color-Mono-7);
+    --light-elements-shadow-color-r: 0;
+    --light-elements-shadow-color-g: 0;
+    --light-elements-shadow-color-b: 0;
+    --light-elements-shadow-opacity-1: 0.20;
+    --light-elements-shadow-opacity-2: 0.14;
+    --light-elements-shadow-opacity-3: 0.12;
+    --light-button-fixed-bg: var(--app-color-Mono-5);
+    --light-button-fixed-bg-Hover: var(--app-color-Mono-6);
+    --light-button-fixed-color: var(--light-nav-bg-color);
+    --light-button-small-bg: var(--light-nav-bg-color);
+    --light-button-small-bg-Hover: var(--app-color-grey-5);
+    --light-button-small-color: var(--light-font-color);
+    --light-button-normal-bg: var(--PWC-colors-orange-light);
+    --light-button-normal-bg-Hover: var(--PWC-colors-orange-lighter);
+    --light-button-normal-color: var(--PWC-colors-grayscale-dark);
+    --light-button-normal-disabled-bg: var(--app-color-grey-9);
+    --light-button-normal-disabled-bg-Hover: initial;
+    --light-button-normal-disabled-color: var(--app-color-grey-6);
+
+    --light-button-icon-bg: transparent;
+    --light-button-icon-color: var(--light-font-color);
+    --light-button-icon-color-Hover: var(--light-font-color-Hover);
+
+    --light-card-bg: var(--light-nav-bg-color);
+    --light-card-bg-Cell: var(--light-main-bg-color);
+
+    --light-item-Selection-bg: var(--PWC-colors-blue-lighter);
+    --light-item-Selection-border-color: var(--PWC-colors-orange);
+
+    --light-input-bg: var(--app-color-grey-14);
+    --light-input-bg-Cell: var(--app-color-grey-13);
+    --nav-height: 3rem;
+}
+[data-theme="light"] {
+    --main-bg-color: var(--light-main-bg-color);
+    --nav-bg-color: var(--light-nav-bg-color);
+    --nav-bg-active: var(--light-nav-bg-active);
+    --font-color: var(--light-font-color);
+    --font-disabled-color: var(--light-font-disabled-color);
+    --icon-heart-stroke-inactive: var(--light-icon-heart-stroke-inactive);
+    --icon-heart-stroke-active: var(--light-icon-heart-stroke-active);
+    --icon-heart-fill-active: var(--light-icon-heart-fill-active);
+    --icon-heart-fill-inactive: var(--light-icon-heart-fill-inactive);
+    --elements-shadow-color-r: var(--light-elements-shadow-color-r);
+    --elements-shadow-color-g: var(--light-elements-shadow-color-g);
+    --elements-shadow-color-b: var(--light-elements-shadow-color-b);
+    --elements-shadow-opacity-1: var(--light-elements-shadow-opacity-1);
+    --elements-shadow-opacity-2: var(--light-elements-shadow-opacity-2);
+    --elements-shadow-opacity-3: var(--light-elements-shadow-opacity-3);
+    --button-fixed-bg: var(--light-button-fixed-bg);
+    --button-fixed-bg-Hover: var(--light-button-fixed-bg-Hover);
+    --button-fixed-color: var(--light-button-fixed-color);
+    --button-small-bg: var(--light-button-small-bg);
+    --button-small-bg-Hover: var(--light-button-small-bg-Hover);
+    --button-small-color: var(--light-button-small-color);
+    --button-normal-bg: var(--light-button-normal-bg);
+    --button-normal-bg-Hover: var(--light-button-normal-bg-Hover);
+    --button-normal-color: var(--light-button-normal-color);
+
+    --button-icon-bg: var(--light-button-icon-bg);
+    --button-icon-color: var(--font-color);
+    --button-icon-color-Hover: var(--light-button-icon-color-Hover);
+
+    --button-normal-disabled-bg: var(--light-button-normal-disabled-bg);
+    --button-normal-disabled-bg-Hover: var(--light-button-normal-disabled-bg-Hover);
+    --button-normal-disabled-color: var(--light-button-normal-disabled-color);
+
+    --card-bg: var(--light-card-bg);
+    --card-bg-Cell: var(--light-card-bg-Cell);
+
+    --item-Selection-bg: var(--light-item-Selection-bg);
+    --item-Selection-border-color: var(--light-item-Selection-border-color);
+
+    --barChart-bar-bg: var(--light-barChart-bar-bg);
+    --input-bg: var(--light-input-bg);
+    --input-bg-Cell: var(--light-input-bg-Cell);
+    --app-modal-bg: var(--light-modal-bg);
+}
+[data-theme="dark"] {
+    --main-bg-color: var(--dark-main-bg-color);
+    --nav-bg-color: var(--dark-nav-bg-color);
+    --nav-bg-active: var(--dark-nav-bg-active);
+    --font-color: var(--dark-font-color);
+    --font-disabled-color: var(--dark-font-disabled-color);
+    --icon-heart-stroke-inactive: var(--dark-icon-heart-stroke-inactive);
+    --icon-heart-stroke-active: var(--dark-icon-heart-stroke-active);
+    --icon-heart-fill-active: var(--dark-icon-heart-fill-active);
+    --icon-heart-fill-inactive: var(--dark-icon-heart-fill-inactive);
+    --elements-shadow-color-r: var(--dark-elements-shadow-color-r);
+    --elements-shadow-color-g: var(--dark-elements-shadow-color-g);
+    --elements-shadow-color-b: var(--dark-elements-shadow-color-b);
+    --elements-shadow-opacity-1: var(--dark-elements-shadow-opacity-1);
+    --elements-shadow-opacity-2: var(--dark-elements-shadow-opacity-2);
+    --elements-shadow-opacity-3: var(--dark-elements-shadow-opacity-3);
+    --button-fixed-bg: var(--dark-button-fixed-bg);
+    --button-fixed-bg-Hover: var(--dark-button-fixed-bg-Hover);
+    --button-fixed-color: var(--dark-button-fixed-color);
+    --button-small-bg: var(--dark-button-small-bg);
+    --button-small-bg-Hover: var(--dark-button-small-bg-Hover);
+    --button-small-color: var(--dark-button-small-color);
+    --button-normal-bg: var(--dark-button-normal-bg);
+    --button-normal-bg-Hover: var(--dark-button-normal-bg-Hover);
+    --button-normal-color: var(--dark-button-normal-color);
+
+    --button-icon-bg: var(--dark-button-icon-bg);
+    --button-icon-color: var(--dark-button-icon-color);
+    --button-icon-color-Hover: var(--dark-button-icon-color-Hover);
+
+    --button-normal-disabled-bg: var(--dark-button-normal-disabled-bg);
+    --button-normal-disabled-bg-Hover: var(--dark-button-normal-disabled-bg-Hover);
+    --button-normal-disabled-color: var(--dark-button-normal-disabled-color);
+
+    --card-bg: var(--dark-card-bg);
+    --card-bg-Cell: var(--dark-card-bg-Cell);
+
+    --item-Selection-bg: var(--dark-item-Selection-bg);
+    --item-Selection-border-color: var(--dark-item-Selection-border-color);
+
+    --barChart-bar-bg: var(--dark-barChart-bar-bg);
+    --app-modal-bg: var(--dark-modal-bg);
+    --input-bg: var(--dark-input-bg);
+    --input-bg-Cell: var(--dark-input-bg-Cell);
+}
+textarea, input {
+    caret-color: var(--font-color);
+    color: var(--font-color);
+    line-height: 1.5;
+    background-color: var(--input-bg);
+    border: none;
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border-radius: 0.3em;
+    outline: none;
+}
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+    font-family: 'Lato', sans-serif;
+}
+H1,H2,H3,H4,H5,H6 {
+    font-family: 'Arvo', serif;
+}
+H1 {
+    font-size: 1.25em;
+}
+button {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    cursor: pointer;
+    margin: 1em;
+    border-radius: 4px;
+    line-height: 2.25em;
+    padding: 0 1em;
+}
+.button-small {
+    padding: .375em 0.6em;
+    background-color: var(--button-small-bg);
+    border-radius: 5px;
+    color: var(--button-small-color);
+    font-size: 0.75em;
+    box-shadow: 0 3px 2px -1px var(--elements-shadow-color), 0 2px 2px 0 var(--elements-shadow-color), 0 1px 6px 0 var(--elements-shadow-color);
+}
+.button-normal {
+    background-color: var(--button-normal-bg);
+    color: var(--button-normal-color);
+    min-width: 80px;
+}
+.button-approve {
+    color: var(--PWC-colors-status-good);
+    background-color: transparent;
+    min-width: 80px;
+}
+.button-reject {
+    color: var(--PWC-colors-status-bad);
+    background-color: transparent;
+    min-width: 80px;
+}
+.button-normal:hover {
+    background-color: var(--button-normal-bg-Hover);
+}
+.button-normal-disabled {
+    background-color: var(--button-normal-disabled-bg);
+    color: var(--button-normal-disabled-color);
+}
+.button-icon {
+    background-color: var(--button-icon-bg);
+    color: var(--button-icon-color);
+    margin: 0.3em 0;
+}
+.button-icon:hover {
+    color: var(--button-icon-color-Hover);
+}
+.button-small:hover {
+    background-color: var(--button-small-bg-Hover);
+}
+.item-selection {
+    background-color: var(--item-Selection-bg);
+}
+.button-fixed {
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    box-shadow: 0 3px 5px -1px var(--elements-shadow-color), 0 6px 5px 0 var(--elements-shadow-color), 0 1px 12px 0 var(--elements-shadow-color);
+    background-color: var(--button-fixed-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button-fixed:hover {
+    background-color: var(--button-fixed-bg-Hover);
+}
+.x100 {
+    width: 1rem;
+    height: 1rem;
+}
+.x125 {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+.x150 {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.x175 {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+.x200 {
+    width: 2rem;
+    height: 2rem;
+}
+.shadow-2dp {
+    box-shadow: 0 2px 2px 0 rgba(var(--elements-shadow-color-r), var(--elements-shadow-color-g), var(--elements-shadow-color-b), var(--elements-shadow-opacity-2)),
+                0 3px 1px -2px rgba(var(--elements-shadow-color-r), var(--elements-shadow-color-g), var(--elements-shadow-color-b), var(--elements-shadow-opacity-3)),
+                0 1px 5px 0 rgba(var(--elements-shadow-color-r), var(--elements-shadow-color-g), var(--elements-shadow-color-b), var(--elements-shadow-opacity-2));
+  }
+.shadow-4dp {
+    box-shadow: 0 4px 5px 0 rgba(var(--elements-shadow-color-r), var(--elements-shadow-color-g), var(--elements-shadow-color-b), var(--elements-shadow-opacity-2)),
+                0 1px 10px 0 rgba(var(--elements-shadow-color-r), var(--elements-shadow-color-g), var(--elements-shadow-color-b), var(--elements-shadow-opacity-3)),
+                0 2px 4px -1px rgba(var(--elements-shadow-color-r), var(--elements-shadow-color-g), var(--elements-shadow-color-b), var(--elements-shadow-opacity-1));
+  }
+.shadow-24dp {
+    box-shadow: 0  9px 46px  8px rgba(var(--elements-shadow-color-r), var(--elements-shadow-color-g), var(--elements-shadow-color-b), var(--elements-shadow-opacity-2)),
+                0 11px 15px -7px rgba(var(--elements-shadow-color-r), var(--elements-shadow-color-g), var(--elements-shadow-color-b), var(--elements-shadow-opacity-3)),
+                0 24px 38px  3px rgba(var(--elements-shadow-color-r), var(--elements-shadow-color-g), var(--elements-shadow-color-b), var(--elements-shadow-opacity-1));
+}
+.card {
+  display: inline-block;
+  background-color: var(--card-bg);
+  padding: 24px;
+  margin: 16px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 2px 0 rgba(var(--elements-shadow-color-r), var(--elements-shadow-color-g), var(--elements-shadow-color-b), var(--elements-shadow-opacity-2)),
+  0 3px 1px -2px rgba(var(--elements-shadow-color-r), var(--elements-shadow-color-g), var(--elements-shadow-color-b), var(--elements-shadow-opacity-3)),
+  0 1px 5px 0 rgba(var(--elements-shadow-color-r), var(--elements-shadow-color-g), var(--elements-shadow-color-b), var(--elements-shadow-opacity-2));
 }

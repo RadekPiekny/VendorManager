@@ -1,6 +1,6 @@
-<body>
-  <app-nav-menu></app-nav-menu>
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
-</body>
+<nav [attr.data-theme]="generalService.darkMode? 'dark':'light'" class="shadow-2dp">
+  
+</nav>
+<main [attr.data-theme]="generalService.darkMode? 'dark':'light'">
+  <router-outlet></router-outlet>
+</main>

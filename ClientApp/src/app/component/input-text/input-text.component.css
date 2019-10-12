@@ -1,0 +1,38 @@
+:host {
+    width: 100%;
+    margin: .5em auto 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    transition: transform .3s ease-in-out, opacity .3s ease-in-out, visibility .3s ease-in-out;
+}
+input {
+    grid-column: 1/-1;
+    grid-row: 2;
+}
+label {
+    font-size: 0.75em;
+    padding: 0.5em;
+    grid-column: 1;
+    grid-row: 1;
+}
+span {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 0.75em;
+    padding: 0.5em;
+    color: var(--app-colors-status-bad);
+    opacity: 0;
+    transform: translateX(1em);
+    animation: slide-in .3s ease forwards;
+}
+@keyframes slide-in {
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@media only screen and (max-width: 1024px) {
+    input {
+        background-color: var(--input-bg-cell);
+    }
+}

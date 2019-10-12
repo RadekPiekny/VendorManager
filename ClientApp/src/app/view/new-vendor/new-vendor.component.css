@@ -1,0 +1,106 @@
+:host {
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 800px;
+}
+form {
+    display: flex;
+    width: 400px;
+    height: 450px;
+    flex-direction: column;
+    padding: 0;
+}
+.content {
+    flex: 1;
+    padding: 24px;
+}
+.transition-wrapper {
+    position: relative;
+    transition: transform .3s ease-in-out;
+    height: 100%;
+}
+fieldset {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    visibility: hidden;
+    transition: visibility .3s;
+}
+fieldset:nth-child(1) {
+    left: calc( 0px);
+}
+fieldset:nth-child(2) {
+    left: calc( 30px);
+}
+fieldset:nth-child(3) {
+    left: calc( 60px);
+}
+fieldset:nth-child(4) {
+    left: calc( 90px);
+}
+fieldset:nth-child(5) {
+    left: calc( 120px);
+}
+.controls-form {
+    padding: 12px 24px;
+}
+.controls-form div {
+    width: 50%;
+    display: inline-block;
+}
+.controls-form div button {
+    margin: auto;
+}
+.container-3D {
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    width: 400px;
+    height: 450px;
+
+}
+.form-flip-front, .form-flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+.form-flip-back {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    padding: 0;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  h3 { 
+    color: var(--app-colors-status-good);
+    text-transform: uppercase;
+  }
+  h3 + p {
+      font-size: 0.75em;
+      color: var(--app-colors-status-good);
+  }
+.flipme {
+    transform: rotateY(180deg);
+}
+button[type=submit] {
+    background-color: lightseagreen;
+}
+.show {
+    visibility: visible;
+}
