@@ -1,0 +1,6 @@
+<div *ngFor="let item of data" class="wrapper">
+    <input type="radio" name="radio-group" [value]="item.value" (click)="changeValue(item)">
+    <div [class.active]="item.active">
+        <label >{{item.label}}</label>
+    </div>
+</div>

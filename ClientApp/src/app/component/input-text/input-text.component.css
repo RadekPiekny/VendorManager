@@ -3,7 +3,7 @@
     margin: .5em auto 0;
     display: grid;
     grid-template-columns: auto 1fr;
-    transition: transform .3s ease-in-out, opacity .3s ease-in-out, visibility .3s ease-in-out;
+    transition: transform .3s cubic-bezier(.54,-0.35,.43,1.35), opacity .3s ease-in-out, visibility .3s ease-in-out;
 }
 input {
     grid-column: 1/-1;

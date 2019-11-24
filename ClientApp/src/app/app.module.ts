@@ -10,6 +10,7 @@ import { InputTextComponent } from './component/input-text/input-text.component'
 import { InputSelectComponent } from './component/input-select/input-select.component';
 import { NewVendorComponent } from './view/new-vendor/new-vendor.component';
 import { RadioSelectComponent } from './component/radio-select/radio-select.component';
+import { ViewSwitcherComponent } from './component/view-switcher/view-switcher.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RadioSelectComponent } from './component/radio-select/radio-select.comp
     InputTextComponent,
     InputSelectComponent,
     NewVendorComponent,
-    RadioSelectComponent
+    RadioSelectComponent,
+    ViewSwitcherComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -3,33 +3,42 @@
         <radio-select [data]="radioSelect" (value)="changePage($event)"></radio-select>
         <div class="content">
             <div class="transition-wrapper" [ngStyle]="transitionWrapperLeft">
-                <fieldset [class.show]="activePage === 1">
+                <fieldset [class.show]="pager.currentPage === 1">
                     <input-text [ngStyle]="getInputStyle(1)" label="company name" formControlName="companyName"></input-text>
                     <input-text [ngStyle]="getInputStyle(1)" label="VAT" formControlName="VAT" ></input-text>
                     <input-text [ngStyle]="getInputStyle(1)" label="registration number" formControlName="registrationNumber" ></input-text>
                     <input-text [ngStyle]="getInputStyle(1)" label="intercompany code" formControlName="intercompanyCode" ></input-text>
                 </fieldset>
-                <fieldset [class.show]="activePage === 2">
+                <fieldset [class.show]="pager.currentPage === 2">
                     <input-text [ngStyle]="getInputStyle(2)" label="street" formControlName="street" ></input-text>
                     <input-text [ngStyle]="getInputStyle(2)" label="postal code" formControlName="postalCode" ></input-text>
                     <input-text [ngStyle]="getInputStyle(2)" label="country" formControlName="country" ></input-text>
                     <input-text [ngStyle]="getInputStyle(2)" label="city" formControlName="city" ></input-text>
                 </fieldset>
-                <fieldset [class.show]="activePage === 3">
-                    <input-text [ngStyle]="getInputStyle(3)" label="contact person" formControlName="contactPerson" ></input-text>
-                    <input-text [ngStyle]="getInputStyle(3)" label="email address" formControlName="emailAddress" ></input-text>
-                    <input-text [ngStyle]="getInputStyle(3)" label="phone number" formControlName="phoneNumber" ></input-text>
-                    <input-text [ngStyle]="getInputStyle(3)" label="authorized contact" formControlName="authorizedContact" ></input-text>
+                <fieldset [class.show]="pager.currentPage === 3">
+                    <div formArrayName="contacts">
+                        <view-switcher [data]="contactSwitcher" (value)="changeContactPage($event)"></view-switcher>
+                        <div *ngFor="let contact of contactForms.controls; let i = index;" >
+                            <div [formGroupName]="i" *ngIf="contactActivePage == i">
+                                <input-text [ngStyle]="getInputStyle(3)" label="contact person" formControlName="contactPerson" ></input-text>
+                                <input-text [ngStyle]="getInputStyle(3)" label="email address" formControlName="emailAddress" ></input-text>
+                                <input-text [ngStyle]="getInputStyle(3)" label="phone number" formControlName="phoneNumber" ></input-text>
+                                <input-text [ngStyle]="getInputStyle(3)" label="authorized contact" formControlName="authorizedContact" ></input-text>
+                                <button type="button" (click)="deleteContact(i)">delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" (click)="addContact()">add</button>
                     <!-- <input-text label="authorized contact email address" formControlName="authorizedContactEmailAddress" ></input-text>
                     <input-text label="authorized contact phone number" formControlName="authorizedContactPhoneNumber" ></input-text> -->
                 </fieldset>
-                <fieldset formGroupName="bank" [class.show]="activePage === 4">
+                <fieldset formGroupName="bank" [class.show]="pager.currentPage === 4">
                     <input-text [ngStyle]="getInputStyle(4)" label="bank country" formControlName="bankCountry" ></input-text>
                     <input-text [ngStyle]="getInputStyle(4)"  label="account number" formControlName="accountNumber" ></input-text>
                     <input-text [ngStyle]="getInputStyle(4)"  label="payment currency" formControlName="paymentCurrency" ></input-text>
                     <input-text [ngStyle]="getInputStyle(4)"  label="beneficiary" formControlName="beneficiary" ></input-text>
                 </fieldset>
-                <fieldset formGroupName="bank" [class.show]="activePage === 5">
+                <fieldset formGroupName="bank" [class.show]="pager.currentPage === 5">
                     <input-text [ngStyle]="getInputStyle(5)"  label="IBAN" formControlName="IBAN" ></input-text>
                     <input-text [ngStyle]="getInputStyle(5)" label="bank key" formControlName="bankKey" ></input-text>
                     <input-text [ngStyle]="getInputStyle(5)" label="SWIFT" formControlName="SWIFT" ></input-text>
@@ -38,12 +47,13 @@
         </div>
         <div class="controls-form">
             <div>
-                <button type="button" (click)="previousPage()" class="button-normal" *ngIf="activePage !== 1">previous</button>
+                <button type="button" (click)="previousPage()" class="button-normal" *ngIf="pager.currentPage !== 1" @actionButton>previous</button>
             </div>
             <div>
-                <button type="button" (click)="nextPage()" class="button-normal" *ngIf="activePage !== this.radioSelect.length">next</button>
-                <button type="submit" (click)="nextPage()" class="button-normal" *ngIf="activePage === this.radioSelect.length">submit</button>
+                <button type="button" (click)="nextPage()" class="button-normal" *ngIf="pager.currentPage !== this.radioSelect.length" @actionButton>next</button>
+                <button type="submit" (click)="nextPage()" class="button-normal" *ngIf="pager.currentPage === this.radioSelect.length" @submitButton>submit</button>
             </div>
+            
         </div>
     </form>
     <div class="card form-flip-back" (click)="formSubmitSuccess = false">

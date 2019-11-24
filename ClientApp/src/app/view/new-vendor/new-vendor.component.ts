@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl  } from '@angular/forms';
 import { VendorForm } from '../../model/vendor.form.model';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { RadioSelect } from '../../model/radio.select.model';
+import { ViewSwitcher } from '../../model/view-switcher.model';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -18,6 +19,22 @@ import { Observable, BehaviorSubject } from 'rxjs';
         ':leave', [style({transform: `translate(0px)`, opacity: 1 }), animate('.3s ease', style({ transform: `translate(-15px)`, opacity: 0 }))
       ], {params : { wtf: "1" }}),
     ]),
+    trigger('actionButton', [
+      transition(
+        ':enter', [style({ transform: `translateY(12px)`, opacity: 0 }), animate('.3s ease', style({ transform: 'translateY(0px)', opacity: 1 }))
+      ], {params : { wtf: "1" }}),
+      transition(
+        ':leave', [style({transform: `translateY(0px)`, opacity: 1 }), animate('.3s ease', style({ transform: `translateY(12px)`, opacity: 0 }))
+      ], {params : { wtf: "1" }}),
+    ]),
+    trigger('submitButton', [
+      transition(
+        ':enter', [style({ transform: `translate(calc(-50% + 36px),-50%)`, opacity: 0 }), animate('.3s .2s ease', style({ transform: 'translate(-50%,-50%)', opacity: 1 }))
+      ], {params : { wtf: "1" }}),
+      transition(
+        ':leave', [style({transform: `translate(-50%,-50%)`, opacity: 1 }), animate('.2s ease', style({ transform: `translate(calc(-50% + 36px),-50%)`, opacity: 0 }))
+      ], {params : { wtf: "1" }}),
+    ]),
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -29,14 +46,19 @@ export class NewVendorComponent implements OnInit {
     {value: 4, label: "bank", active: false},
     {value: 5, label: "details", active: false}
   ];
+  contactSwitcher: ViewSwitcher[] = [];
+  contactActivePage: number;
   formSubmitSuccess: boolean;
   vendorForm: FormGroup;
-  activePage: number = 1;
+  contacts: FormArray;
+  pager: Pager = new Pager;
   pageObserve = new BehaviorSubject(1);
   transitionWrapperLeft: Object = { transform: "translateX('0px')" };
   constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.pager.currentPage = 1;
+    this.pager.previousPage = 0;
     this.pageObserve.subscribe(page => {
 
     })
@@ -49,10 +71,7 @@ export class NewVendorComponent implements OnInit {
       postalCode: '',
       country: '',
       city: '',
-      contactPerson: '',
-      emailAddress: '',
-      phoneNumber: '',
-      authorizedContact: '',
+      contacts: this.fb.array([]),
       bank: this.fb.group({
         bankCountry: '',
         IBAN: '',
@@ -66,6 +85,29 @@ export class NewVendorComponent implements OnInit {
     this.vendorForm.valueChanges.subscribe(data => {
       console.log(data);
     })
+  }
+
+  get contactForms() {
+    return this.vendorForm.get('contacts') as FormArray;
+  }
+
+  addContact() {
+    const contact = this.fb.group({
+      contactPerson: new FormControl(''),
+      emailAddress: new FormControl(''),
+      phoneNumber: new FormControl(''),
+      authorizedContact: new FormControl('')
+    })
+    this.contactForms.push(contact);
+    let vs: ViewSwitcher = new ViewSwitcher;
+    vs.active = false;
+    vs.label = this.contactForms.length.toString();
+    vs.value = this.contactForms.length;
+    this.contactSwitcher.push(vs);
+  }
+
+  deleteContact(i: number) {
+    this.contactForms.removeAt(i);
   }
 
   private createForm(vendorForm: VendorForm): FormGroup {
@@ -91,39 +133,60 @@ export class NewVendorComponent implements OnInit {
   }
 
   changePage(page: number) {
-    this.activePage = page;
+    this.pager.previousPage = this.pager.currentPage;
+    this.pager.currentPage = page;
     this.radioSelect.forEach(v => v.active = false);
-    this.radioSelect[this.activePage - 1].active = true;
-    let transition: number = (this.activePage - 1) / (this.radioSelect.length - 1) * 120 * -1;
+    this.radioSelect[this.pager.currentPage - 1].active = true;
+    let transition: number = (this.pager.currentPage - 1) / (this.radioSelect.length - 1) * 120 * -1;
     this.transitionWrapperLeft = { transform: "translateX(" + transition + "px)" };
     //this.transitionWrapperLeft = { transform: "translateX(100px)" };
     this.cd.detectChanges();
   }
 
   nextPage() {
-    if (this.activePage<this.radioSelect.length) {
-      this.changePage(this.activePage + 1);
+    if (this.pager.currentPage<this.radioSelect.length) {
+      this.changePage(this.pager.currentPage + 1);
     }
   }
 
   previousPage() {
-    if (this.activePage>1) {
-      this.changePage(this.activePage - 1);
+    if (this.pager.currentPage>1) {
+      this.changePage(this.pager.currentPage - 1);
     }
   }
 
   getInputStyle(page: number): Object {
-    if (page === this.activePage) {
+    if (page === this.pager.currentPage) {
       return {
         transform: "translateX(0px)",
         opacity: 1,
+        transitionDelay: ".3s"
       }
     }
-    return {
-      transform: `translateX(${this.getRndInteger(-20,20)}px)`,
-      visibility: "hidden",
-      opacity: 0.1
+    if (page > this.pager.currentPage) {
+      return {
+        transform: `translateX(${this.getRndInteger(20,60)}px)`,
+        opacity: 0.001,
+        transitionDelay: "0s"
+      }
     }
+    if (page < this.pager.currentPage) {
+      return {
+        transform: `translateX(${this.getRndInteger(-60,-20)}px)`,
+        opacity: 0.001,
+        transitionDelay: "0s"
+      }
+    }
+
   }
 
+  changeContactPage(page: number) {
+    this.contactActivePage = page;
+  }
+
+}
+
+class Pager {
+  currentPage: number;
+  previousPage: number;
 }

@@ -30,7 +30,7 @@ fieldset {
     align-items: center;
     justify-content: space-around;
     visibility: hidden;
-    transition: visibility .3s;
+    transition: visibility 3.3s;
 }
 fieldset:nth-child(1) {
     left: calc( 0px);
@@ -49,10 +49,11 @@ fieldset:nth-child(5) {
 }
 .controls-form {
     padding: 12px 24px;
+    display: flex;
 }
 .controls-form div {
-    width: 50%;
-    display: inline-block;
+    position: relative;
+    flex-basis: 50%;
 }
 .controls-form div button {
     margin: auto;
@@ -99,7 +100,12 @@ fieldset:nth-child(5) {
     transform: rotateY(180deg);
 }
 button[type=submit] {
-    background-color: lightseagreen;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: lightseagreen;
+    font-weight: 900;
 }
 .show {
     visibility: visible;

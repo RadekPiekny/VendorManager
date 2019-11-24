@@ -1,0 +1,42 @@
+:host {
+    display: flex;
+    width: 100%;
+    margin: 8px 0;
+    height: 30px;
+    align-items: center;
+}
+.wrapper {
+    position: relative;
+    flex: 1;
+    transition: background-color .2s ease-in-out;
+}
+input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+    margin: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+input + div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgb(128, 207, 203);
+    border-radius: 50%;
+    display: flex;
+}
+label {
+    margin: auto;
+    font-size: 0.75em;
+    color: rgb(128, 207, 203);
+}
+.active {
+    background-color: rgb(128, 207, 203);
+    color: white;
+}
