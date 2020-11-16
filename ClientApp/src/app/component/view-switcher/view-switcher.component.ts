@@ -9,6 +9,7 @@ import { ViewSwitcher } from '../../model/view-switcher.model';
 export class ViewSwitcherComponent implements OnInit {
   @Input() data: ViewSwitcher[];
   @Output() value: EventEmitter<number> = new EventEmitter<number>();
+  @Output() new: EventEmitter<null> = new EventEmitter<null>();
   constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -23,6 +24,9 @@ export class ViewSwitcherComponent implements OnInit {
     this.value.emit(parseInt(viewSwitcher.value.toString()));
   }
 
+  newOption() {
+    this.new.emit();
+  }
 
 
 }

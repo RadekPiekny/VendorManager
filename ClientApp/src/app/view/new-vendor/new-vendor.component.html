@@ -17,7 +17,7 @@
                 </fieldset>
                 <fieldset [class.show]="pager.currentPage === 3">
                     <div formArrayName="contacts">
-                        <view-switcher [data]="contactSwitcher" (value)="changeContactPage($event)"></view-switcher>
+                        <view-switcher [data]="contactSwitcher" (value)="changeContactPage($event)" (new)="addContact()"></view-switcher>
                         <div *ngFor="let contact of contactForms.controls; let i = index;" >
                             <div [formGroupName]="i" *ngIf="contactActivePage == i">
                                 <input-text [ngStyle]="getInputStyle(3)" label="contact person" formControlName="contactPerson" ></input-text>
@@ -28,7 +28,6 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" (click)="addContact()">add</button>
                     <!-- <input-text label="authorized contact email address" formControlName="authorizedContactEmailAddress" ></input-text>
                     <input-text label="authorized contact phone number" formControlName="authorizedContactPhoneNumber" ></input-text> -->
                 </fieldset>

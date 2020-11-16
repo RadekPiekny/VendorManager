@@ -47,7 +47,7 @@ export class NewVendorComponent implements OnInit {
     {value: 5, label: "details", active: false}
   ];
   contactSwitcher: ViewSwitcher[] = [];
-  contactActivePage: number;
+  contactActivePage: number = 0;
   formSubmitSuccess: boolean;
   vendorForm: FormGroup;
   contacts: FormArray;
@@ -85,13 +85,14 @@ export class NewVendorComponent implements OnInit {
     this.vendorForm.valueChanges.subscribe(data => {
       console.log(data);
     })
+    this.addContact(true);
   }
 
   get contactForms() {
     return this.vendorForm.get('contacts') as FormArray;
   }
 
-  addContact() {
+  addContact(active: boolean = false) {
     const contact = this.fb.group({
       contactPerson: new FormControl(''),
       emailAddress: new FormControl(''),
@@ -100,9 +101,9 @@ export class NewVendorComponent implements OnInit {
     })
     this.contactForms.push(contact);
     let vs: ViewSwitcher = new ViewSwitcher;
-    vs.active = false;
+    vs.active = active;
     vs.label = this.contactForms.length.toString();
-    vs.value = this.contactForms.length;
+    vs.value = this.contactForms.length - 1;
     this.contactSwitcher.push(vs);
   }
 

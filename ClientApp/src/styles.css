@@ -113,7 +113,7 @@ html {
     --light-item-Selection-border-color: var(--PWC-colors-orange);
 
     --light-input-bg: var(--app-color-grey-14);
-    --light-input-bg-Cell: var(--app-color-grey-13);
+    --light-input-bg-Cell: var(--app-color-grey-15);
     --nav-height: 3rem;
 }
 [data-theme="light"] {
@@ -210,7 +210,7 @@ textarea, input {
     caret-color: var(--font-color);
     color: var(--font-color);
     line-height: 1.5;
-    background-color: var(--input-bg);
+    background-color: rgba(232,232,232,1);
     border: none;
     width: 100%;
     padding: 12px;
@@ -300,6 +300,9 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+label {
+    color: rgb(60,60,60);
 }
 .button-fixed:hover {
     background-color: var(--button-fixed-bg-Hover);
